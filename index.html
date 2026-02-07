@@ -1,56 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Avarias Externas – Motocicleta</title>
+  <meta charset="UTF-8">
+  <title>Avarias Externas – Motocicleta</title>
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f0f2f5;
-  padding: 10px;
-  text-align: center;
-}
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-.card {
-  background: #ffffff;
-  padding: 15px;
-  border-radius: 10px;
-  max-width: 380px;
-  margin: auto;
-}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 10px;
+      text-align: center;
+    }
 
-.container {
-  position: relative;
-  width: 100%;
-}
+    .card {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 450px;
+      margin: auto;
+    }
 
-.container img {
-  width: 100%;
-  display: block;
-  position: relative;
-  z-index: 1; /* imagem embaixo */
-}
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+    }
 
-/* áreas clicáveis */
-.area {
-  position: absolute;
-  z-index: 10;        /* <<< ESSENCIAL */
-  cursor: pointer;
-  background: transparent;
-}
+    .container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      z-index: 1;
+    }
 
-.area.selecionado {
-  background: rgba(255, 0, 0, 0.4);
-}
+    .area {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      cursor: pointer;
+      font-size: 18px;
+      color: red;
+      transition: transform 0.2s, color 0.2s;
+    }
 
-select, textarea, button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  font-size: 14px;
-}
-</style>
+    .area:hover::after {
+      content: attr(data-parte);
+      position: absolute;
+      top: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .area.selecionado {
+      color: darkred;
+      transform: translate(-50%, -50%) scale(1.4);
+      text-shadow: 0 0 5px rgba(255,0,0,0.8);
+    }
+
+    select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
@@ -62,56 +87,61 @@ select, textarea, button {
     <img src="moto-topo.png" alt="Motocicleta vista superior">
 
     <!-- RODA DIANTEIRA -->
-    <div class="area" data-parte="roda dianteira"
-      style="top:1%; left:42%; width:16%; height:8%;"></div>
-
-    <!-- FRENTE -->
-    <div class="area" data-parte="parte dianteira"
-      style="top:9%; left:36%; width:28%; height:10%;"></div>
+    <div class="area" data-parte="roda dianteira" style="top:6%; left:50%;">
+      <i class="fas fa-circle-notch"></i>
+    </div>
 
     <!-- RETROVISORES -->
-    <div class="area" data-parte="retrovisor esquerdo"
-      style="top:12%; left:12%; width:20%; height:10%;"></div>
-
-    <div class="area" data-parte="retrovisor direito"
-      style="top:12%; left:68%; width:20%; height:10%;"></div>
+    <div class="area" data-parte="retrovisor esquerdo" style="top:17%; left:20%;">
+      <i class="fas fa-eye"></i>
+    </div>
+    <div class="area" data-parte="retrovisor direito" style="top:17%; left:80%;">
+      <i class="fas fa-eye"></i>
+    </div>
 
     <!-- MANETES -->
-    <div class="area" data-parte="manete esquerdo"
-      style="top:18%; left:18%; width:14%; height:10%;"></div>
-
-    <div class="area" data-parte="manete direito"
-      style="top:18%; left:68%; width:14%; height:10%;"></div>
+    <div class="area" data-parte="manete esquerdo" style="top:22%; left:30%;">
+      <i class="fas fa-grip-lines-vertical"></i>
+    </div>
+    <div class="area" data-parte="manete direito" style="top:22%; left:70%;">
+      <i class="fas fa-grip-lines-vertical"></i>
+    </div>
 
     <!-- PAINEL -->
-    <div class="area" data-parte="painel"
-      style="top:20%; left:40%; width:20%; height:10%;"></div>
+    <div class="area" data-parte="painel" style="top:26%; left:50%;">
+      <i class="fas fa-gauge"></i>
+    </div>
 
     <!-- TANQUE -->
-    <div class="area" data-parte="tanque"
-      style="top:28%; left:32%; width:36%; height:16%;"></div>
-
-    <!-- LATERAIS -->
-    <div class="area" data-parte="lateral esquerda"
-      style="top:36%; left:14%; width:20%; height:28%;"></div>
-
-    <div class="area" data-parte="lateral direita"
-      style="top:36%; left:66%; width:20%; height:28%;"></div>
+    <div class="area" data-parte="tanque" style="top:35%; left:50%;">
+      <i class="fas fa-gas-pump"></i>
+    </div>
 
     <!-- ASSENTO -->
-    <div class="area" data-parte="assento"
-      style="top:50%; left:32%; width:36%; height:20%;"></div>
+    <div class="area" data-parte="assento" style="top:60%; left:50%;">
+      <i class="fas fa-chair"></i>
+    </div>
+
+    <!-- LATERAIS -->
+    <div class="area" data-parte="lateral esquerda" style="top:50%; left:32%;">
+      <i class="fas fa-bars-staggered"></i>
+    </div>
+    <div class="area" data-parte="lateral direita" style="top:50%; left:68%;">
+      <i class="fas fa-bars-staggered"></i>
+    </div>
 
     <!-- SETAS TRASEIRAS -->
-    <div class="area" data-parte="seta traseira esquerda"
-      style="top:70%; left:22%; width:14%; height:10%;"></div>
-
-    <div class="area" data-parte="seta traseira direita"
-      style="top:70%; left:64%; width:14%; height:10%;"></div>
+    <div class="area" data-parte="seta traseira esquerda" style="top:77%; left:35%;">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+    <div class="area" data-parte="seta traseira direita" style="top:77%; left:65%;">
+      <i class="fas fa-arrow-right"></i>
+    </div>
 
     <!-- RODA TRASEIRA -->
-    <div class="area" data-parte="roda traseira"
-      style="top:82%; left:42%; width:16%; height:12%;"></div>
+    <div class="area" data-parte="roda traseira" style="top:91%; left:50%;">
+      <i class="fas fa-circle-notch"></i>
+    </div>
   </div>
 
   <select id="tipo-avaria">
