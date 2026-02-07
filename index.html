@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Avarias Externas – Motocicleta</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  padding: 10px;
+  text-align: center;
+}
+
+.card {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 380px;
+  margin: auto;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.container img {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1; /* imagem embaixo */
+}
+
+/* áreas clicáveis */
+.area {
+  position: absolute;
+  z-index: 10;        /* <<< ESSENCIAL */
+  cursor: pointer;
+  background: transparent;
+}
+
+.area.selecionado {
+  background: rgba(255, 0, 0, 0.4);
+}
+
+select, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h3>Avarias externas – motocicleta (vista superior)</h3>
+
+  <div class="container">
+    <img src="imagens/moto-topo.png" alt="Motocicleta vista superior">
+
+    <!-- RODA DIANTEIRA -->
+    <div class="area" data-parte="roda dianteira"
+      style="top:1%; left:42%; width:16%; height:8%;"></div>
+
+    <!-- FRENTE -->
+    <div class="area" data-parte="parte dianteira"
+      style="top:9%; left:36%; width:28%; height:10%;"></div>
+
+    <!-- RETROVISORES -->
+    <div class="area" data-parte="retrovisor esquerdo"
+      style="top:12%; left:12%; width:20%; height:10%;"></div>
+
+    <div class="area" data-parte="retrovisor direito"
+      style="top:12%; left:68%; width:20%; height:10%;"></div>
+
+    <!-- MANETES -->
+    <div class="area" data-parte="manete esquerdo"
+      style="top:18%; left:18%; width:14%; height:10%;"></div>
+
+    <div class="area" data-parte="manete direito"
+      style="top:18%; left:68%; width:14%; height:10%;"></div>
+
+    <!-- PAINEL -->
+    <div class="area" data-parte="painel"
+      style="top:20%; left:40%; width:20%; height:10%;"></div>
+
+    <!-- TANQUE -->
+    <div class="area" data-parte="tanque"
+      style="top:28%; left:32%; width:36%; height:16%;"></div>
+
+    <!-- LATERAIS -->
+    <div class="area" data-parte="lateral esquerda"
+      style="top:36%; left:14%; width:20%; height:28%;"></div>
+
+    <div class="area" data-parte="lateral direita"
+      style="top:36%; left:66%; width:20%; height:28%;"></div>
+
+    <!-- ASSENTO -->
+    <div class="area" data-parte="assento"
+      style="top:50%; left:32%; width:36%; height:20%;"></div>
+
+    <!-- SETAS TRASEIRAS -->
+    <div class="area" data-parte="seta traseira esquerda"
+      style="top:70%; left:22%; width:14%; height:10%;"></div>
+
+    <div class="area" data-parte="seta traseira direita"
+      style="top:70%; left:64%; width:14%; height:10%;"></div>
+
+    <!-- RODA TRASEIRA -->
+    <div class="area" data-parte="roda traseira"
+      style="top:82%; left:42%; width:16%; height:12%;"></div>
+  </div>
+
+  <select id="tipo-avaria">
+    <option value="">Selecione o tipo de avaria</option>
+    <option value="Amassado">Amassado</option>
+    <option value="Arranhado">Arranhado</option>
+    <option value="Quebrado">Quebrado</option>
+    <option value="Avaria diversa">Avaria diversa</option>
+  </select>
+</div>
+
+<div class="card" style="margin-top:15px">
+  <h3>Texto para relato</h3>
+  <textarea id="texto" rows="6" readonly></textarea>
+  <button onclick="copiar()">Copiar texto</button>
+</div>
+
+<script>
+let parteAtual = null;
+const avarias = {};
+const tipo = document.getElementById('tipo-avaria');
+const texto = document.getElementById('texto');
+
+document.querySelectorAll('.area').forEach(area => {
+  area.addEventListener('click', () => {
+    document.querySelectorAll('.area').forEach(a => a.classList.remove('selecionado'));
+    area.classList.add('selecionado');
+    parteAtual = area.dataset.parte;
+  });
+});
+
+tipo.addEventListener('change', () => {
+  if (parteAtual && tipo.value) {
+    avarias[parteAtual] = tipo.value;
+    gerarTexto();
+    tipo.value = '';
+  }
+});
+
+function gerarTexto() {
+  const frases = Object.entries(avarias)
+    .map(([parte, dano]) => `apresentava ${parte} ${dano.toLowerCase()}`);
+  texto.value = frases.length
+    ? `Durante atendimento no local, foi possível observar que a motocicleta ${frases.join(', ')}.`
+    : '';
+}
+
+function copiar() {
+  texto.select();
+  document.execCommand('copy');
+}
+</script>
+
+</body>
+</html>
