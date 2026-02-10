@@ -1,197 +1,145 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Avarias Externas – Motocicleta</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avarias Externas – Motocicleta</title>
 
-  <!-- Font Awesome para ícones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-      padding: 10px;
-      text-align: center;
-    }
+<style>
+body{font-family:Arial;background:#f0f2f5;padding:10px;text-align:center;}
+.card{background:#fff;padding:15px;border-radius:10px;max-width:480px;margin:auto;}
+.container{position:relative;max-width:420px;margin:auto;}
+.container img{width:100%;}
 
-    .card {
-      background: #ffffff;
-      padding: 15px;
-      border-radius: 10px;
-      max-width: 450px;
-      margin: auto;
-    }
+.area{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  cursor:pointer;
+  opacity:0;
+  width:50px;height:50px;
+  display:flex;align-items:center;justify-content:center;
+}
 
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      margin: auto;
-    }
+.area:hover{opacity:1;}
+.area:hover::after{
+  content:attr(data-parte);
+  position:absolute;top:-26px;left:50%;transform:translateX(-50%);
+  background:#222;color:#fff;font-size:12px;padding:4px 6px;border-radius:4px;
+}
 
-    .container img {
-      width: 100%;
-      height: auto;
-      display: block;
-      z-index: 1;
-    }
+.area.selecionado{
+  opacity:1;background:#00b300;color:#fff;border-radius:50%;
+}
 
-    .area {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      cursor: pointer;
-      font-size: 18px;
-      color: red;
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    .area:hover::after {
-      content: attr(data-parte);
-      position: absolute;
-      top: -26px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #222;
-      color: #fff;
-      font-size: 12px;
-      padding: 4px 6px;
-      border-radius: 4px;
-      white-space: nowrap;
-      pointer-events: none;
-      z-index: 20;
-    }
-
-    .area.selecionado {
-      color: darkred;
-      transform: translate(-50%, -50%) scale(1.4);
-      text-shadow: 0 0 5px rgba(255,0,0,0.8);
-    }
-
-    select, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-  </style>
+select,textarea,button{width:100%;padding:10px;margin-top:10px;}
+</style>
 </head>
 
 <body>
 
 <div class="card">
-  <h3>Avarias externas – motocicleta (vista superior)</h3>
+<h3>Avarias externas – motocicleta</h3>
 
-  <div class="container">
-    <img src="moto-topo.png" alt="Motocicleta vista superior">
+<div class="container">
+<img src="moto-topo.png">
 
-    <!-- RODA DIANTEIRA -->
-    <div class="area" data-parte="roda dianteira" style="top:6%; left:50%;">
-      <i class="fas fa-circle-notch"></i>
-    </div>
+<div class="area" data-parte="roda dianteira" style="top:8%; left:50%;"><i class="fas fa-check"></i></div>
+<div class="area" data-parte="paralama dianteiro" style="top:12%; left:50%;"><i class="fas fa-check"></i></div>
 
-    <!-- RETROVISORES -->
-    <div class="area" data-parte="retrovisor esquerdo" style="top:17%; left:20%;">
-      <i class="fas fa-eye"></i>
-    </div>
-    <div class="area" data-parte="retrovisor direito" style="top:17%; left:80%;">
-      <i class="fas fa-eye"></i>
-    </div>
+<div class="area" data-parte="retrovisor esquerdo" style="top:23%; left:26%;"><i class="fas fa-check"></i></div>
+<div class="area" data-parte="retrovisor direito" style="top:23%; left:74%;"><i class="fas fa-check"></i></div>
 
-    <!-- MANETES -->
-    <div class="area" data-parte="manete esquerdo" style="top:22%; left:30%;">
-      <i class="fas fa-grip-lines-vertical"></i>
-    </div>
-    <div class="area" data-parte="manete direito" style="top:22%; left:70%;">
-      <i class="fas fa-grip-lines-vertical"></i>
-    </div>
+<div class="area" data-parte="guidão" style="top:20%; left:50%;"><i class="fas fa-check"></i></div>
 
-    <!-- PAINEL -->
-    <div class="area" data-parte="painel" style="top:26%; left:50%;">
-      <i class="fas fa-gauge"></i>
-    </div>
+<div class="area" data-parte="manete esquerdo" style="top:28%; left:29%;"><i class="fas fa-check"></i></div>
+<div class="area" data-parte="manete direito" style="top:28%; left:71%;"><i class="fas fa-check"></i></div>
 
-    <!-- TANQUE -->
-    <div class="area" data-parte="tanque" style="top:35%; left:50%;">
-      <i class="fas fa-gas-pump"></i>
-    </div>
+<div class="area" data-parte="painel" style="top:20%; left:50%;"><i class="fas fa-check"></i></div>
 
-    <!-- ASSENTO -->
-    <div class="area" data-parte="assento" style="top:60%; left:50%;">
-      <i class="fas fa-chair"></i>
-    </div>
+<div class="area" data-parte="tanque" style="top:30%; left:50%;"><i class="fas fa-check"></i></div>
 
-    <!-- LATERAIS -->
-    <div class="area" data-parte="lateral esquerda" style="top:50%; left:32%;">
-      <i class="fas fa-bars-staggered"></i>
-    </div>
-    <div class="area" data-parte="lateral direita" style="top:50%; left:68%;">
-      <i class="fas fa-bars-staggered"></i>
-    </div>
+<div class="area" data-parte="carenagem lateral esquerda" style="top:35%; left:31%;"><i class="fas fa-check"></i></div>
+<div class="area" data-parte="carenagem lateral direita" style="top:35%; left:68%;"><i class="fas fa-check"></i></div>
 
-    <!-- SETAS TRASEIRAS -->
-    <div class="area" data-parte="seta traseira esquerda" style="top:77%; left:35%;">
-      <i class="fas fa-arrow-left"></i>
-    </div>
-    <div class="area" data-parte="seta traseira direita" style="top:77%; left:65%;">
-      <i class="fas fa-arrow-right"></i>
-    </div>
+<div class="area" data-parte="assento" style="top:60%; left:50%;"><i class="fas fa-check"></i></div>
 
-    <!-- RODA TRASEIRA -->
-    <div class="area" data-parte="roda traseira" style="top:91%; left:50%;">
-      <i class="fas fa-circle-notch"></i>
-    </div>
-  </div>
+<div class="area" data-parte="pedaleira esquerda" style="top:55%; left:36%;"><i class="fas fa-check"></i></div>
+<div class="area" data-parte="pedaleira direita" style="top:55%; left:64%;"><i class="fas fa-check"></i></div>
 
-  <select id="tipo-avaria">
-    <option value="">Selecione o tipo de avaria</option>
-    <option value="Amassado">Amassado</option>
-    <option value="Arranhado">Arranhado</option>
-    <option value="Quebrado">Quebrado</option>
-    <option value="Avaria diversa">Avaria diversa</option>
-  </select>
+<div class="area" data-parte="descarga" style="top:70%; left:36%;"><i class="fas fa-check"></i></div>
+
+<div class="area" data-parte="seta traseira esquerda" style="top:80%; left:40%;"><i class="fas fa-check"></i></div>
+<div class="area" data-parte="seta traseira direita" style="top:80%; left:60%;"><i class="fas fa-check"></i></div>
+
+<div class="area" data-parte="roda traseira" style="top:90%; left:50%;"><i class="fas fa-check"></i></div>
+
+</div>
+
+<select id="tipo-avaria">
+<option value="">Selecione o tipo de avaria</option>
+<option>Amassado</option>
+<option>Arranhado</option>
+<option>Quebrado</option>
+<option>Trincado</option>
+<option>Faltando</option>
+<option>Solto</option>
+<option>Rasgado</option>
+<option>Entortado</option>
+<option>Levemente empenado</option>
+<option>Não funcionando</option>
+<option>Avaria diversa</option>
+</select>
 </div>
 
 <div class="card" style="margin-top:15px">
-  <h3>Texto para relato</h3>
-  <textarea id="texto" rows="6" readonly></textarea>
-  <button onclick="copiar()">Copiar texto</button>
+<h3>Texto</h3>
+<textarea id="texto" rows="5"></textarea>
+<button onclick="copiar()">Copiar texto</button>
+<button onclick="limpar()">Limpar</button>
 </div>
 
 <script>
-let parteAtual = null;
-const avarias = {};
-const tipo = document.getElementById('tipo-avaria');
-const texto = document.getElementById('texto');
+let parteAtual=null;
+const avarias={};
+const tipo=document.getElementById('tipo-avaria');
+const texto=document.getElementById('texto');
 
-document.querySelectorAll('.area').forEach(area => {
-  area.addEventListener('click', () => {
-    document.querySelectorAll('.area').forEach(a => a.classList.remove('selecionado'));
-    area.classList.add('selecionado');
-    parteAtual = area.dataset.parte;
-  });
+document.querySelectorAll('.area').forEach(area=>{
+area.addEventListener('click',()=>{
+area.classList.toggle('selecionado');
+parteAtual=area.dataset.parte;
+});
 });
 
-tipo.addEventListener('change', () => {
-  if (parteAtual && tipo.value) {
-    avarias[parteAtual] = tipo.value;
-    gerarTexto();
-    tipo.value = '';
-  }
+tipo.addEventListener('change',()=>{
+if(parteAtual && tipo.value){
+avarias[parteAtual]=tipo.value;
+gerarTexto();
+tipo.value='';
+}
 });
 
-function gerarTexto() {
-  const frases = Object.entries(avarias)
-    .map(([parte, dano]) => `apresentava ${parte} ${dano.toLowerCase()}`);
-  texto.value = frases.length
-    ? `Durante atendimento no local, foi possível observar que a motocicleta ${frases.join(', ')}.`
-    : '';
+function gerarTexto(){
+const frases=Object.entries(avarias)
+.map(([parte,dano])=>`${parte} ${dano.toLowerCase()}`);
+texto.value=frases.length
+? `Durante o atendimento, foi possível observar os seguintes danos aparentes externos na motocicleta: ${frases.join(', ')}.`
+: '';
 }
 
-function copiar() {
-  texto.select();
-  document.execCommand('copy');
+function copiar(){
+texto.select();
+document.execCommand('copy');
+}
+
+function limpar(){
+for (let k in avarias) delete avarias[k];
+document.querySelectorAll('.area').forEach(a=>a.classList.remove('selecionado'));
+texto.value='';
+parteAtual=null;
 }
 </script>
 
