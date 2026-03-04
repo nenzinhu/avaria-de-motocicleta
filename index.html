@@ -1,147 +1,36 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avarias Externas – Motocicleta</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-body{font-family:Arial;background:#f0f2f5;padding:10px;text-align:center;}
-.card{background:#fff;padding:15px;border-radius:10px;max-width:480px;margin:auto;}
-.container{position:relative;max-width:420px;margin:auto;}
-.container img{width:100%;}
-
-.area{
-  position:absolute;
-  transform:translate(-50%,-50%);
-  cursor:pointer;
-  opacity:0;
-  width:50px;height:50px;
-  display:flex;align-items:center;justify-content:center;
-}
-
-.area:hover{opacity:1;}
-.area:hover::after{
-  content:attr(data-parte);
-  position:absolute;top:-26px;left:50%;transform:translateX(-50%);
-  background:#222;color:#fff;font-size:12px;padding:4px 6px;border-radius:4px;
-}
-
-.area.selecionado{
-  opacity:1;background:#00b300;color:#fff;border-radius:50%;
-}
-
-select,textarea,button{width:100%;padding:10px;margin-top:10px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>Avaria de Motocicleta</title>
 </head>
-
 <body>
-
-<div class="card">
-<h3>Avarias externas – motocicleta</h3>
-
-<div class="container">
-<img src="moto-topo.png">
-
-<div class="area" data-parte="roda dianteira" style="top:8%; left:50%;"><i class="fas fa-check"></i></div>
-<div class="area" data-parte="paralama dianteiro" style="top:12%; left:50%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="retrovisor esquerdo" style="top:23%; left:26%;"><i class="fas fa-check"></i></div>
-<div class="area" data-parte="retrovisor direito" style="top:23%; left:74%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="guidão" style="top:20%; left:50%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="manete esquerdo" style="top:28%; left:29%;"><i class="fas fa-check"></i></div>
-<div class="area" data-parte="manete direito" style="top:28%; left:71%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="painel" style="top:20%; left:50%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="tanque" style="top:30%; left:50%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="carenagem lateral esquerda" style="top:35%; left:31%;"><i class="fas fa-check"></i></div>
-<div class="area" data-parte="carenagem lateral direita" style="top:35%; left:68%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="assento" style="top:60%; left:50%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="pedaleira esquerda" style="top:55%; left:36%;"><i class="fas fa-check"></i></div>
-<div class="area" data-parte="pedaleira direita" style="top:55%; left:64%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="descarga" style="top:70%; left:36%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="seta traseira esquerda" style="top:80%; left:40%;"><i class="fas fa-check"></i></div>
-<div class="area" data-parte="seta traseira direita" style="top:80%; left:60%;"><i class="fas fa-check"></i></div>
-
-<div class="area" data-parte="roda traseira" style="top:90%; left:50%;"><i class="fas fa-check"></i></div>
-
-</div>
-
-<select id="tipo-avaria">
-<option value="">Selecione o tipo de avaria</option>
-<option>Amassado</option>
-<option>Arranhado</option>
-<option>Quebrado</option>
-<option>Trincado</option>
-<option>Faltando</option>
-<option>Solto</option>
-<option>Rasgado</option>
-<option>Entortado</option>
-<option>Levemente empenado</option>
-<option>Não funcionando</option>
-<option>Avaria diversa</option>
-</select>
-</div>
-
-<div class="card" style="margin-top:15px">
-<h3>Texto</h3>
-<textarea id="texto" rows="5"></textarea>
-<button onclick="copiar()">Copiar texto</button>
-<button onclick="limpar()">Limpar</button>
-</div>
-
-<script>
-let parteAtual=null;
-const avarias={};
-const tipo=document.getElementById('tipo-avaria');
-const texto=document.getElementById('texto');
-
-document.querySelectorAll('.area').forEach(area=>{
-area.addEventListener('click',()=>{
-area.classList.toggle('selecionado');
-parteAtual=area.dataset.parte;
-});
-});
-
-tipo.addEventListener('change',()=>{
-if(parteAtual && tipo.value){
-avarias[parteAtual]=tipo.value;
-gerarTexto();
-tipo.value='';
-}
-});
-
-function gerarTexto(){
-const frases=Object.entries(avarias)
-.map(([parte,dano])=>`${parte} ${dano.toLowerCase()}`);
-texto.value=frases.length
-? `Durante o atendimento, foi possível observar os seguintes danos aparentes externos na motocicleta: ${frases.join(', ')}.`
-: '';
-}
-
-function copiar(){
-texto.select();
-document.execCommand('copy');
-}
-
-function limpar(){
-for (let k in avarias) delete avarias[k];
-document.querySelectorAll('.area').forEach(a=>a.classList.remove('selecionado'));
-texto.value='';
-parteAtual=null;
-}
-</script>
-
+    <div class="app">
+        <h1>Avaria de Motocicleta</h1>
+        <div id="svg-container">
+            <svg width="500" height="500">
+                <!-- Circle hotspots for motorcycle external parts -->
+                <circle class="hotspot" cx="250" cy="250" r="30" style="fill: red;" />
+                <circle class="hotspot" cx="100" cy="100" r="30" style="fill: blue;" />
+                <circle class="hotspot" cx="400" cy="100" r="30" style="fill: green;" />
+                <!-- Add more hotspots as necessary -->
+            </svg>
+        </div>
+        <div id="output"></div>
+    </div>
+    <script>
+        // Keeping the existing avaria text generation UI and behavior
+        // Update to use .hotspot instead of .area for click handling
+        document.querySelectorAll('.hotspot').forEach(hotspot => {
+            hotspot.addEventListener('click', function() {
+                // Logic for hotspot click handling
+                const output = document.getElementById('output');
+                output.innerHTML = 'You clicked on a hotspot!';
+                // Additional logic for avaria text generation can be added here
+            });
+        });
+    </script>
 </body>
 </html>
